@@ -4,11 +4,9 @@
 
 import os
 import os.path
-import sys
-import codecs
+import time
+import hashlib
 
-#reload(sys)
-sys.setdefaultencoding('utf-8')
 
 def deep_search(path):
     dir_content = os.listdir(path)
@@ -39,16 +37,18 @@ def deep_search_list(dir_list):
         print(dir_content)
 
 
+def get_hexdigest(filename):
+    hashobj = hashlib.md5()
+    with open(filename, 'rb') as f:
+        hashobj.update(f.read())
+    md5_str = hashobj.hexdigest()
+
+    return md5_str
+
 if __name__ == '__main__':
-    dir_list, __ = deep_search2('C:\\')
-    if 'C:\\bootmgr' in dir_list:
-        print('OK')
-    if os.path.isdir('C:\\bootmgr'):
-        print('OK')
-    print(dir_list)
-    print(os.listdir('C:\\dl'))
-
-    deep_search_list(dir_list)
-
-
-
+    filename = '/Users/light.zhang/log/slow.log'
+    start_time = time.clock()
+    md5_str = get_hexdigest(filename)
+    end_time = time.clock()
+    print('hash of %s: %s' % (filename, md5_str))
+    print('duration: %.4f seconds' % (end_time - start_time))
