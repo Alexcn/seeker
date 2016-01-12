@@ -6,6 +6,7 @@ import os
 import os.path
 import time
 import hashlib
+import pickle
 
 
 def deep_search(path):
