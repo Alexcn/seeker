@@ -20,6 +20,7 @@ def deep_search2(path):
     dir_content = os.listdir(path)
     dir_list = []
     file_list = []
+# Linux 下符号链接并不按照文件来处理
     for name in dir_content:
         if os.path.isfile(name):
             file_list.append(os.path.join(path, name))
@@ -55,5 +56,6 @@ def get_hexdigest(filename):
     return md5_str
 
 if __name__ == '__main__':
-    deep_search3('/')
-    print(os.listdir('/'))
+    dir_list, file_list = deep_search2('/')
+    print(dir_list)
+    print(file_list)
