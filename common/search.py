@@ -5,8 +5,6 @@
 import os
 import os.path
 import time
-import hashlib
-import pickle
 
 
 def deep_search(path):
@@ -22,12 +20,23 @@ def deep_search2(path):
     dir_content = os.listdir(path)
     dir_list = []
     file_list = []
+# Linux 下符号链接并不按照文件来处理
     for name in dir_content:
         if os.path.isfile(name):
             file_list.append(os.path.join(path, name))
         elif os.path.isdir(os.path.join(path, name)):
             dir_list.append(os.path.join(path, name))
     return dir_list, file_list
+
+def deep_search3(path):
+    dir_content = os.listdir(path)
+    dir_list = []
+    file_list = []
+    for name in dir_content:
+        if os.path.isfile(name):
+            print('%s is a common file.' % name)
+        elif os.path.isdir(name):
+            print('%s is a directory.' % name)
 
 
 def deep_search_list(dir_list):
@@ -47,9 +56,6 @@ def get_hexdigest(filename):
     return md5_str
 
 if __name__ == '__main__':
-    filename = '/Users/light.zhang/log/slow.log'
-    start_time = time.clock()
-    md5_str = get_hexdigest(filename)
-    end_time = time.clock()
-    print('hash of %s: %s' % (filename, md5_str))
-    print('duration: %.4f seconds' % (end_time - start_time))
+    dir_list, file_list = deep_search2('/')
+    print(dir_list)
+    print(file_list)
