@@ -5,6 +5,7 @@
 import os
 import os.path
 import time
+import hashlib
 
 
 def deep_search(path):
