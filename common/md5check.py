@@ -26,6 +26,7 @@ def md5Checksum(filePath):
     fh.close()
     return m.hexdigest()
 
+
 def pathispath(ps_path):
     if os.path.isfile(ps_path):
         pa_path = os.path.split(ps_path)
