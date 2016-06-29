@@ -36,8 +36,9 @@ def pathispath(ps_path):
             for ps_one in os.walk(ps_path):
                 print(' '*32, ps_one[0])
                 for ps_file in ps_one[2]:
-                    print(os.path.join(ps_one[0], ps_file))
-                    print(md5Checksum(os.path.join(ps_one[0], ps_file)))
+                    if (os.path.isfile(os.path.join(ps_one[0], ps_file))):
+                        print(os.path.join(ps_one[0], ps_file))
+                        print(md5Checksum(os.path.join(ps_one[0], ps_file)))
 
 
 
@@ -57,7 +58,8 @@ def visit(arg, dirname, names):
 
 
 def main():
-    filepath = '/Users/light/'
+    #filepath = '/Users/light/'
+    filepath = '/Users/light.zhang/'
     pathispath(filepath)
 
 
