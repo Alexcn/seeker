@@ -41,6 +41,7 @@ def is_writeable(path, check_parent=False):
     # provided path
     return os.access(parent_dir, os.W_OK)
 
+
 def is_readable(path):
     '''
     Check if a given path is readable by the current user.
@@ -55,6 +56,7 @@ def is_readable(path):
 
     # The path does not exist
     return False
+
 
 def findfile(start, name=None):
     for relpath, dirs, files in os.walk(start):
@@ -74,6 +76,7 @@ def md5Checksum(filePath):
     fh.close()
     return m.hexdigest()
 
+
 # 还需要解决判断文件的类型，例如socket文件不能被计算，只能计算常规的文件
 def pathispath(ps_path):
     if os.path.isfile(ps_path):
@@ -86,7 +89,8 @@ def pathispath(ps_path):
             for ps_one in os.walk(ps_path):
                 print(' '*32, ps_one[0])
                 for ps_file in ps_one[2]:
-                    if (os.path.isfile(os.path.join(ps_one[0], ps_file))):
+                    curent_file = os.path.join(ps_one[0], ps_file)
+                    if os.path.isfile(curent_file) and is_readable(curent_file):
                         print(os.path.join(ps_one[0], ps_file))
                         print(md5Checksum(os.path.join(ps_one[0], ps_file)))
 
